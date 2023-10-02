@@ -116,7 +116,7 @@ int main(void){
 		CAR_LIGHT = FSM[cState].PBout;							//output cars leds to port B
 		PED_LIGHT = FSM[cState].PFout;							//output pedestrian leds to port F
 		delay_ms(FSM[cState].wait);													// delay of current state
-		input=GPIO_PORTE_DATA_R;														//read port E inputs to input variable 
+		input=SENSOR;														//read port E inputs to input variable 
 		cState=FSM[cState].next[input];											//assign next state to cState
   }
 }
