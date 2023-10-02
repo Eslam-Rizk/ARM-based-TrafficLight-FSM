@@ -13,8 +13,28 @@ The execution of a Moore FSM repeats this sequence over and over:
 * Input.
 * Go to next state, which depends on the input and the current state.
 
-The TM4C123GH6PM MCU reads the 3 sensors as inputs at PE2(pedestrians), PE1(south cars) and PE0(west cars) Then outputs the cars LEDs states at PB5-0 and pedestrians LEDs at PF3(walk) and PF0(don't walk).
+First, we draw what's called State Transition Graph (STG) which helps demonstrate the system states, outputs, delay, inputs and next states:
+<img src="https://github.com/Eslam-Rizk/ARM-based-TrafficLight-FSM/blob/main/Moore%20State.jpg" width=600>
 
+then we use this data to from a state table which is used to make our data structre.
+# What does this system do?
+## Inputs:
+* Pedestrians sensor at PE2.
+* South cars sensor at PE1.
+* West cars sensor at PE0.
+## Outputs:
+* West red, yellow and green LEDs at PB5, PB4 and PB3 respectively.
+* South red, yellow and green LEDs at PB2, PB1 and PB0 respectively.
+* Pedestrians red and green LEDs at PF1 and OF3 respectively.
+## States:
+There should be 6 states to the system, goW , waitW, goS, waitS, walk and waitWalk but we don't have a yellow LED for the waitWalk so we flash the pedestrian red LED 2 times instead.So, The final states are goW , waitW, goS, waitS, walk, on1, off1, on2, and off2.The wait states have 500ms delay and go & walk states have 2000ms delay.
+## State Transition Graph:
+<img src="https://github.com/Eslam-Rizk/ARM-based-TrafficLight-FSM/blob/main/state%20transition%20graph.png" width=600>
 
-First, we draw what's called State Transition Graph (STG) which helps demonstrate the system states, inputs and next states:
+## State Table:
+After we fill the state table, we use this data to make our structure which is of struct data type:
+<img src="https://github.com/Eslam-Rizk/ARM-based-TrafficLight-FSM/blob/main/state%20table.png" width=600>
+
+# Code
+
 
