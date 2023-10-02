@@ -25,13 +25,6 @@
 #define CAR_LIGHT   (*((volatile unsigned long *)0x400050FC))   //port B bits 0-5
 #define PED_LIGHT   (*((volatile unsigned long *)0x40025028))   //port F bits 3&1
 
-struct state{
-	unsigned long PBout;  										//6bit pattern output 
-	unsigned long PFout;											//pf3 & pf1 out
-	unsigned long wait; 											//delay in 10ms
-	unsigned long next[8];										//next state of 8 inputs 
-}; typedef const struct state stype;
-
 //define states indeces
 #define goW 0
 #define waitW 1
@@ -46,6 +39,13 @@ struct state{
 unsigned char cState;       														 //variabe for current state
 unsigned long input;   																	 //variale to store sensor data
 
+
+struct state{
+	unsigned long PBout;  										//6bit pattern output 
+	unsigned long PFout;											//pf3 & pf1 out
+	unsigned long wait; 											//delay in 10ms
+	unsigned long next[8];										//next state of 8 inputs 
+}; typedef const struct state stype;
 //finite state machine of 9 states
 stype FSM[9]={     
 {0x0C,0x02,200,{ goW , goW ,waitW,waitW,waitW,waitW,waitW,waitW}},
